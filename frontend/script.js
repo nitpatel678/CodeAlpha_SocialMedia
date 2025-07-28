@@ -1,4 +1,4 @@
-const API_BASE = "https://codealpha-socialmedia-x1if.onrender.com";
+const API_BASE = "http://localhost:5000/api";
 let currentUser = null;
 let currentPostType = "text";
 
@@ -210,7 +210,7 @@ function createPostElement(post, isLiked) {
                     <p>${post.content}</p>
                     ${
                       post.image
-                        ? `<img src="${API_BASE}${post.image}" alt="Post image" class="post-image">`
+                        ? `<img src="http://localhost:5000${post.image}" alt="Post image" class="post-image">`
                         : ""
                     }
                 </div>
