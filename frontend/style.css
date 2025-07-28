@@ -1,0 +1,621 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex; /* Make body a flex container to lay out sidebar and main content */
+    flex-direction: row; /* Default for desktop: sidebar and content side-by-side */
+}
+
+/* The .container class itself should be minimal, as specific parents will control padding/max-width */
+.container {
+    padding: 20px; /* Default padding for content within general containers */
+}
+
+/* --- Auth Section Styles --- */
+#auth-section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    min-height: 500px;
+}
+
+.auth-image {
+    width: 50%;
+    background: url('Gemini_Generated_Image_ols6qtols6qtols6.png') no-repeat center center/cover;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.form-side {
+    width: 50%;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-side form {
+    background: #fff;
+    padding: 0;
+    border-radius: 15px;
+    box-shadow: none;
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 12px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    width: auto;
+    min-width: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    margin-left: 10px;
+}
+
+.btn-danger {
+    background: #dc3545;
+}
+
+.btn-success {
+    background: #28a745;
+}
+
+/* --- Main App Layout --- */
+.main-app {
+    display: none; /* Hidden by default, JS will change to flex */
+    flex-grow: 1; /* Allows main app content to fill remaining horizontal space */
+    flex-direction: column; /* Stacks its children (container) vertically */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- Sidebar Navigation (Desktop Styles) --- */
+.nav {
+    position: fixed; /* Desktop: Fixed position relative to viewport */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Fills vertical height */
+    width: 100px; /* Increased horizontal width */
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 20px 0;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.nav-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #333;
+    transition: 0.3s;
+    position: relative;
+    padding: 0;
+    background: none;
+}
+
+.nav-link:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.nav-link.active {
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: linear-gradient(135deg, #667eea, #764ba2);
+    color: #764ba2;
+    font-weight: bold;
+    background: white;
+}
+
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #c0c0c0, #ffffff);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* --- Main Content Area (inside .main-app) --- */
+.main-app > .container {
+    width: calc(100% - 100px); /* Take full width minus sidebar width */
+    margin-left: 100px; /* Offset for the fixed sidebar */
+    padding: 20px; /* Padding inside this container */
+    box-sizing: border-box;
+}
+
+.main-app .section {
+    padding: 0;
+    width: 100%;
+    margin-left: 0;
+}
+
+/* --- Post Forms and Feed Sections (Equal Size & Centered) --- */
+.post-form {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px; /* Adjust this to match desired content width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post-type-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.post-type-btn {
+    padding: 10px 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: auto;
+    min-width: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.post-type-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+.post-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    width: 100%;
+    max-width: 900px; /* Adjust this to match desired content width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-right: 12px;
+}
+
+.post-content {
+    margin-bottom: 15px;
+}
+
+.post-image {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.action-btn i {
+    font-size: 20px;
+    margin-right: 0;
+}
+
+.action-btn:hover,
+.action-btn.active {
+    background: #f8f9fa;
+    color: #667eea;
+}
+
+.action-btn.liked {
+    color: #dc3545;
+}
+
+.comments-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.comment {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.comment-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.comment-input {
+    flex: 1;
+    margin: 0;
+}
+
+/* --- Search Section (Modern Styling) --- */
+.search-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-container h3 {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+#search-input {
+    border: 2px solid #a8c0f5;
+    padding: 14px 20px;
+    border-radius: 30px;
+    font-size: 18px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: #f9fbff;
+    width: 100%;
+}
+
+#search-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 12px rgba(102, 126, 234, 0.6);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.search-results {
+    margin-top: 30px;
+}
+
+.user-result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #eee;
+}
+
+.user-result:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.stat-label {
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+.error {
+    color: #dc3545;
+    background: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+}
+
+.success {
+    color: #155724;
+    background: #d4edda;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- Media Queries for Mobile/Tablet Responsiveness --- */
+/* Target screens up to 1024px wide (covers most tablets in landscape, and all phones) */
+@media (max-width: 1024px) {
+    body {
+        flex-direction: column; /* Stack vertically for mobile/tablet */
+    }
+
+    /* --- CRITICAL FIX FOR NAV OVERRIDE --- */
+    .nav {
+        /* Mobile Navigation (at bottom) - Aggressively override desktop fixed position */
+        width: 100% !important;   /* Force full width */
+        height: auto !important;  /* Force auto height */
+        position: fixed !important; /* Force fixed position */
+        bottom: 0 !important;       /* Force pin to bottom */
+        top: auto !important;       /* IMPORTANT: Ensure it's NOT pinned to the top */
+        left: 0 !important;
+        flex-direction: row !important; /* Force horizontal stacking of nav links */
+        justify-content: space-around !important; /* Force even spacing */
+        padding: 10px 0 !important;
+        box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1) !important;
+        border-radius: 0 !important;
+        margin-top: 0 !important;
+        z-index: 100 !important; /* Ensure it's on top of other content */
+        background: #fff !important; /* Ensure its background is white */
+    }
+
+    .nav-links {
+        flex-direction: row;
+        margin-top: 0;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .nav-link {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    /* Main App Layout - Mobile Adjustments */
+    .main-app {
+        padding-left: 0; /* Remove fixed sidebar offset for mobile */
+        width: 100%; /* Take full width */
+        min-height: calc(100vh - 70px); /* Ensure main app has enough height above bottom nav */
+
+        /* --- DEBUGGING BORDERS - REMOVE AFTER FIXING LAYOUT --- */
+        border: 2px dashed red;
+        background-color: rgba(255, 255, 0, 0.1); /* Light yellow overlay */
+        /* --- END DEBUGGING --- */
+    }
+
+    /* Main content container for mobile */
+    .main-app > .container {
+        width: 100%; /* Take full width on mobile */
+        padding: 10px; /* Smaller padding on mobile */
+        margin-left: 0; /* Remove fixed desktop margin for mobile */
+        margin-bottom: 70px; /* Space for fixed bottom nav */
+        max-width: none; /* Remove desktop max-width constraint for mobile */
+
+        /* --- DEBUGGING BORDERS - REMOVE AFTER FIXING LAYOUT --- */
+        border: 2px dashed blue;
+        background-color: rgba(0, 255, 0, 0.1); /* Light green overlay */
+        /* --- END DEBUGGING --- */
+    }
+
+    /* Auth Section - Mobile Adjustments */
+    #auth-section {
+        height: auto;
+        padding: 20px;
+    }
+
+    .auth-container {
+        flex-direction: column;
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .auth-image {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 20px;
+    }
+
+    .form-side {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    /* All content cards/sections for mobile */
+    .post-form,
+    .post-card,
+    .search-container,
+    .profile-container,
+    #posts-container .error,
+    #posts-container .success {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 95%; /* Make them slightly narrower than full width to avoid touching edges */
+        padding: 15px; /* Smaller padding inside cards for mobile */
+    }
+
+    /* Profile Header - Mobile Adjustments */
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}

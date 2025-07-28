@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <div id="auth-section" class="container">
+        <div class="auth-container">
+            <div class="form-side">
+                <div id="login-form">
+                    <h1>Login to Connectly</h1>
+                    <div id="login-error" class="error hidden"></div>
+                    <form onsubmit="login(event)">
+                        <div class="form-group">
+                            <label for="login-email">Email:</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password:</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit"><i class="bi bi-box-arrow-in-right"></i></button>
+                        <button type="button" class="btn-secondary" onclick="showRegister()"><i class="bi bi-person-plus"></i></button>
+                    </form>
+                </div>
+
+                <div id="register-form" class="hidden">
+                    <h1>Register for Connectly</h1>
+                    <div id="register-error" class="error hidden"></div>
+                    <form onsubmit="register(event)">
+                        <div class="form-group">
+                            <label for="register-username">Username:</label>
+                            <input type="text" id="register-username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email:</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password:</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <button type="submit"><i class="bi bi-person-plus"></i></button>
+                        <button type="button" class="btn-secondary" onclick="showLogin()"><i class="bi bi-box-arrow-in-right"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="auth-image"></div>
+        </div>
+    </div>
+
+    <div id="main-app" class="main-app">
+        <nav class="nav">
+            <div class="nav-links">
+                <a href="#" class="nav-link active" onclick="showSection('feed', event)"><i class="bi bi-house-door"></i></a>
+                <a href="#" class="nav-link" onclick="showSection('search', event)"><i class="bi bi-search"></i></a>
+                <a href="#" class="nav-link" onclick="showSection('profile', event)"><i class="bi bi-person"></i></a>
+                <a href="#" class="nav-link" onclick="logout()"><i class="bi bi-box-arrow-right"></i></a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div id="feed-section" class="section">
+                <div class="post-form">
+                    <h3>Create a Post</h3>
+                    <div class="post-type-selector">
+                        <button type="button" class="post-type-btn active" onclick="setPostType('text', event)"><i class="bi bi-fonts"></i></button>
+                        <button type="button" class="post-type-btn" onclick="setPostType('image', event)"><i class="bi bi-image"></i></button>
+                    </div>
+
+                    <form id="post-form" onsubmit="createPost(event)">
+                        <div class="form-group">
+                            <textarea id="post-content" placeholder="What's on your mind?" rows="3" required></textarea>
+                        </div>
+                        <div id="image-upload" class="form-group hidden">
+                            <label for="post-image">Select Image:</label>
+                            <input type="file" id="post-image" accept="image/*">
+                        </div>
+                        <button type="submit"><i class="bi bi-send"></i></button>
+                    </form>
+                </div>
+
+                <div id="posts-container"></div>
+            </div>
+
+            <div id="search-section" class="section hidden">
+                <div class="search-container">
+                    <h3>Search Users</h3>
+                    <div class="form-group">
+                        <input type="text" id="search-input" placeholder="Search by username..." onkeyup="searchUsers()">
+                    </div>
+                    <div id="search-results" class="search-results"></div>
+                </div>
+            </div>
+
+            <div id="profile-section" class="section hidden">
+                <div id="profile-container" class="profile-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
