@@ -75,15 +75,4 @@ Frontend (HTML/CSS/JS) will run via static files. Backend runs at:
 http://localhost:5000
 ```
 
----
-
-## 📸 Screenshots (Optional)
-
-* Login / Signup Page
-* User Profile Page
-* Feed with Posts
-* Upload Post (Text/Image)
-* Follow System in Action
-
----
 
